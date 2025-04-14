@@ -14,22 +14,18 @@ Route::get('/posts/create', [PostController::class, 'create']);
 Route::get('/posts/{post_id}', [PostController::class, 'show']);
 
 Route::get('/prueba', function(){
-    /* Crear nuevo post
+    // Crear nuevo post usando create()
+    // $post = Post::create([
+    //     'title' => 'TiTulo DE pRueBa 4',
+    //     'content' => 'Contenido de prueba 4',
+    //     'category' => 'Categoria de prueba 4'
+    // ]);
 
-    $post = new Post;
-    
-    $post->title = 'Titulo de prueba 3';
-    $post->content = 'Contenido de prueba 3';
-    $post->category = 'Categoria de prueba 3';
+    // return $post;
 
-    $post->save();
-
+    // Recuperar post por ID 
+    $post = Post::find(4);
     return $post;
-    */
-
-    /* Recuperar post por ID 
-    $post = Post::find(1);
-    */
 
     /*
     // Recuperar post por el valor de la columna especificada y recuperar la primera coincidencia
