@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function index()
     {
-        return view('posts.index');
+        $posts = Post::orderBy('id', 'desc')->get();
+
+        return view('posts.index', compact('posts'));
     }
 
     public function create()
@@ -16,8 +19,47 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    public function show($post_id)
+    public function store(Request $request)
     {
-        return view('posts.show', ['post_id' => $post_id]);
+        $post = Post::create([
+            'title' => $request->title,
+            'category' => $request->category,
+            'content' => $request->content
+        ]);
+
+        return redirect()->route('posts.show', $post);
+    }
+
+    public function show($post)
+    {
+        $post = Post::find($post);
+        return view('posts.show', ['post' => $post]);
+    }
+    
+    public function edit($post)
+    {
+        $post = Post::find($post);
+        return view('posts.edit', compact('post'));
+    }
+
+    public function update(Request $request, $post)
+    {
+        $post = Post::find($post);
+
+        $post->update([
+            'title' => $request->title,
+            'category' => $request->category,
+            'content' => $request->content
+        ]);
+
+        return redirect()->route('posts.show', $post);
+    }
+
+    public function destroy($post)
+    {
+        $post = Post::find($post);
+        $post->delete();
+
+        return redirect('/posts');
     }
 }
