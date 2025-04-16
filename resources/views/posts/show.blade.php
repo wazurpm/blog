@@ -7,7 +7,7 @@
     <title>Laravel 12 | Posts</title>
 </head>
 <body>
-    <a href="/posts">Volver a posts</a>
+    <a href="{{ route('posts.index') }}">Volver a posts</a>
 
     <h1>
         Título: {{ $post->title }}
@@ -18,10 +18,10 @@
     
     <p>{{ $post->content }}</p>
 
-    <a href="/posts/{{ $post->id }}/edit">
+    <a href="{{ route('posts.edit', $post->id) }}">
         Editar post
     </a>
-    <form action="/posts/{{ $post->id }}" method="POST">
+    <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
         @csrf
         @method('DELETE')
 

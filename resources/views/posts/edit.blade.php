@@ -1,7 +1,7 @@
 <x-app-layout>
     <h1>Formulario para editar el post {{ $post->id }}</h1>
 
-    <form action="/posts/{{ $post->id }}" method="POST">
+    <form action="{{ route('posts.update', $post->id) }}" method="POST">
 
         @csrf
 
