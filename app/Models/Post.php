@@ -2,32 +2,47 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
     use HasFactory;
     
-    // Si se omite esta declaración Eloquent utiliza una tabla con el mismo nombre del modelo, todo en minusculas y en plural, en este caso 'posts'
     protected $table = 'posts';
 
     protected $fillable = ['title', 'content', 'category'];
 
-    protected function casts(): array
+    protected $casts = [
+        'published_at' => 'datetime',
+        'is_active' => 'boolean',
+    ];
+
+    protected static function boot()
     {
-        return [
-            'published_at' => 'datetime',
-            'is_active' => 'boolean',
-        ];
+        parent::boot();
+        
+        static::creating(function ($post) {
+            if (!$post->slug) {
+                $post->slug = static::createUniqueSlug($post->title);
+            }
+            if (!$post->published_at) {
+                $post->published_at = now();
+            }
+        });
     }
 
-    protected function title(): Attribute
+    protected static function createUniqueSlug($title)
     {
-        return new Attribute(
-            get: fn ($value) => ucfirst($value),
-            set: fn ($value) => strtolower($value)
-        );
+        $slug = Str::slug($title);
+        $count = static::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
+        
+        return $count ? "{$slug}-{$count}" : $slug;
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

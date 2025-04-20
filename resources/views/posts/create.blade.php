@@ -1,34 +1,40 @@
 <x-app-layout>
-    <h1>Formulario para crear un nuevo post</h1>
+    <div class="max-w-2xl mx-auto">
+        <h1 class="text-2xl font-bold mb-6">Crear Nuevo Post</h1>
 
-    <form action="{{ route('posts.store') }}" method="POST">
+        <form action="{{ route('posts.store') }}" method="POST" class="space-y-4">
+            @csrf
 
-        @csrf
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Título:</label>
+                <input type="text" name="title" value="{{ old('title') }}" 
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+            </div>
 
-        <label>
-            Título:
-            <input type="text" name="title">
-        </label>
-        
-        <br><br>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Slug:</label>
+                <input type="text" name="slug" value="{{ old('slug') }}"
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+            </div>
 
-        <label>
-            Categoría:
-            <input type="text" name="category">
-        </label>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Categoría:</label>
+                <input type="text" name="category" value="{{ old('category') }}"
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+            </div>
 
-        <br><br>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Contenido:</label>
+                <textarea name="content" rows="5" 
+                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">{{ old('content') }}</textarea>
+            </div>
 
-        <label>
-            Contenido:
-            <textarea name="content"></textarea>
-        </label>
-
-        <br><br>
-
-        <button type="submit">
-            Crear post
-        </button>
-
-    </form>
+            <div>
+                <button type="submit" 
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Crear Post
+                </button>
+            </div>
+        </form>
+    </div>
 </x-app-layout>

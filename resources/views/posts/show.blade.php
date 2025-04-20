@@ -1,33 +1,35 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Laravel 12 | Posts</title>
-</head>
-<body>
-    <a href="{{ route('posts.index') }}">Volver a posts</a>
+<x-app-layout>
+    <article class="max-w-2xl mx-auto">
+        <h1 class="text-3xl font-bold mb-4">{{ $post->title }}</h1>
+        <div class="mb-4">
+            <span class="text-gray-600">Categoría: {{ $post->category }}</span>
+        </div>
+        
+        <div class="prose max-w-none mb-6">
+            {{ $post->content }}
+        </div>
 
-    <h1>
-        Título: {{ $post->title }}
-    </h1>
-    <p>
-        <b>Categoría: </b>{{ $post->category }}
-    </p>
-    
-    <p>{{ $post->content }}</p>
+        <div class="flex space-x-4">
+            <a href="{{ route('posts.edit', $post->slug) }}" 
+               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Editar Post
+            </a>
 
-    <a href="{{ route('posts.edit', $post->id) }}">
-        Editar post
-    </a>
-    <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
-        @csrf
-        @method('DELETE')
+            <form action="{{ route('posts.destroy', $post->slug) }}" method="POST" class="inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" 
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        onclick="return confirm('¿Estás seguro de que deseas eliminar este post?')">
+                    Eliminar Post
+                </button>
+            </form>
+        </div>
 
-        <button type="submit">
-            Eliminar post
-        </button>
-    </form>
-</body>
-</html>
+        <div class="mt-4">
+            <a href="{{ route('posts.index') }}" class="text-blue-600 hover:underline">
+                ← Volver a la lista
+            </a>
+        </div>
+    </article>
+</x-app-layout>
