@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -19,15 +20,15 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        $validated = $request->validate([
+        /* $validated = $request->validate([
             'title' => 'required|min:5|max:255',
             'category' => 'required',
             'content' => 'required'
-        ]);
+        ]); */
 
-        Post::create($validated);
+        Post::create($request->all());
 
         return redirect()->route('posts.index');
     }
