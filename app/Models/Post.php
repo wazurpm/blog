@@ -12,7 +12,11 @@ class Post extends Model
     
     protected $table = 'posts';
 
-    protected $fillable = ['title', 'content', 'category'];
+    protected $fillable = [
+        'title',
+        'category',
+        'content'
+    ];
 
     protected $casts = [
         'published_at' => 'datetime',

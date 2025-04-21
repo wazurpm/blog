@@ -22,12 +22,12 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required',
+            'title' => 'required|min:5|max:255',
             'category' => 'required',
             'content' => 'required'
         ]);
 
-        $post = Post::create($validated);
+        Post::create($validated);
 
         return redirect()->route('posts.index');
     }
@@ -44,11 +44,13 @@ class PostController extends Controller
 
     public function update(Request $request, Post $post)
     {
-        $post->update([
-            'title' => $request->title,
-            'category' => $request->category,
-            'content' => $request->content
+        $validated = $request->validate([
+            'title' => 'required|min:5|max:255',
+            'category' => 'required',
+            'content' => 'required'
         ]);
+
+        $post->update($validated);
 
         return redirect()->route('posts.show', $post);
     }
