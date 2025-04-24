@@ -18,7 +18,7 @@
     </header>
 
     <main class="container mx-auto px-4 py-8">
-        {{ $slot }}
+        <x-AppLayout>  {{ view('welcome') }}  </x-AppLayout>
     </main>
 
     <footer class="bg-gray-800 text-white p-4 mt-8">

@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-AppLayout>
     <article class="max-w-2xl mx-auto">
         <h1 class="text-3xl font-bold mb-4">{{ $post->title }}</h1>
         <div class="mb-4">
@@ -32,4 +32,4 @@
             </a>
         </div>
     </article>
-</x-app-layout>
+</x-AppLayout>

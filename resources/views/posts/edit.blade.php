@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-AppLayout>
     <div class="max-w-2xl mx-auto">
         <h1 class="text-2xl font-bold mb-6">Editar Post</h1>
 
@@ -50,4 +50,4 @@
             </div>
         </form>
     </div>
-</x-app-layout>
+</x-AppLayout>

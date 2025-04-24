@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-AppLayout>
     <div class="space-y-4">
         <h1 class="text-2xl font-bold">Lista de Posts</h1>
 
@@ -21,4 +21,4 @@
 
         {{ $posts->links() }}
     </div>
-</x-app-layout>
+</x-AppLayout>
