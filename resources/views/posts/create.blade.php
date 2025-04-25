@@ -1,7 +1,7 @@
 <x-AppLayout>
     <div class="max-w-2xl mx-auto">
         <h1 class="text-2xl font-bold mb-6">Crear Nuevo Post</h1>
-
+        
         @if ($errors->any())
         
         <x-alert type="danger" class="mb-4">

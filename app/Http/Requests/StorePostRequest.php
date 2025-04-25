@@ -28,17 +28,4 @@ class StorePostRequest extends FormRequest
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'title.required' => 'The :attribute field is required.'
-        ];
-    }
-
-    public function attributes()
-    {
-        return [
-            'title' => 'name'
-        ];
-    }
 }
